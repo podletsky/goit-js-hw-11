@@ -35,7 +35,7 @@ async function searchPhoto(namePhoto) {
 
 async function getPicture(event) {
   event.preventDefault();
-  galleryList.innerHTML = ''
+  // galleryList.innerHTML = ''
   namePhoto = event.target.elements.searchQuery.value.trim();
   const result= await searchPhoto(namePhoto);
   console.log(result)
