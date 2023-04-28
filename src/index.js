@@ -11,6 +11,20 @@ btnLoadMore.style.display = 'none';
 btnSubmit.addEventListener('click', () => {
   btnLoadMore.style.display = 'block';
 });
+btnLoadMore.addEventListener('click', () => {
+  btnLoadMore.style.display = 'none';
+  
+});
+
+btnLoadMore.addEventListener('click', async () => {
+  const response = await searchPhoto(namePhoto, page, perPage);
+  page += 1;
+
+  if (arr1.push(...response.data.hits)) {
+    markup(arr1);
+    btnLoadMore.style.display = 'block';
+  }
+});
 
 searchQuery.addEventListener('input', () => {
   if (!searchQuery.value.trim()) {
@@ -30,9 +44,7 @@ let page = 1;
 let namePhoto = '';
 const arr1 = [];
 
-btnLoadMore.addEventListener('click', () => {
-  btnLoadMore.style.display = 'none';
-});
+
 
 async function searchPhoto(namePhoto, page = 1, perPage = 40) {
   try {
@@ -46,10 +58,13 @@ async function searchPhoto(namePhoto, page = 1, perPage = 40) {
 async function getPicture(event) {
   event.preventDefault();
   namePhoto = searchQuery.value.trim();
+  galleryList.innerHTML=''
   const result = await searchPhoto(namePhoto);
+  
 
   const totalHits = result.data.totalHits;
   const arr = result.data.hits;
+
 
   if (totalHits !== 0) {
     Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
@@ -57,7 +72,9 @@ async function getPicture(event) {
 
   if (arr.length === 0) {
     Notiflix.Notify.warning("Sorry, there are no images matching your search query. Please try again.");
-  } else {
+  }
+  
+  else {
     markup(arr);
   }
 }
@@ -65,7 +82,7 @@ async function getPicture(event) {
 async function markup(arr) {
   const imageCard = arr.map(({ comments, webformatURL, downloads, likes, largeImageURL, tags, views }) => `
     <div class="photo-card">
-      <img src=${webformatURL} alt=${downloads} loading="lazy" />
+      <img src=${webformatURL} alt=${downloads} loading="${largeImageURL}" />
       <div class="info">
         <p class="info-item">
           <b>${likes}</b>
@@ -85,15 +102,7 @@ async function markup(arr) {
   galleryList.insertAdjacentHTML('beforeend', imageCard);
 }
 
-btnLoadMore.addEventListener('click', async () => {
-  const response = await searchPhoto(namePhoto, page, perPage);
-  page += 1;
 
-  if (arr1.push(...response.data.hits)) {
-    markup(arr1);
-    btnLoadMore.style.display = 'block';
-  }
-});
 
 
 
