@@ -6,13 +6,20 @@ const searchQwery = form.querySelector('input[name="searchQuery"]')
 const btnLoadMore = document.querySelector('.load-more')
 
 const btnSubmit = form.querySelector('button[type="submit"]');
-// btnLoadMore.style.display='none'
-// btnSubmit.addEventListener('click', () => {
-//   btnLoadMore.style.display = 'block'
-//   if (arr.length > 40 ) {
-    
-//   }
-//   })
+btnLoadMore.style.display='none'
+
+
+
+
+
+const q=btnSubmit.addEventListener('click', () => {
+ btnLoadMore.style.display = 'block'
+
+})
+
+
+
+
 
 
 imageCard=[]
@@ -20,8 +27,8 @@ searchQwery.addEventListener('input', () => {
   if (!searchQwery.value.trim()) {
     galleryList.innerHTML = '';
   }
-  
-})
+} 
+)
 
 
 
@@ -35,8 +42,13 @@ const safesearch ='true'
 let perPage = 40
 let page =1
 let namePhoto=''
-const arr=[]
+const arr1=[]
+btnLoadMore.addEventListener('click', () => {
 
+    btnLoadMore.style.display = 'none'
+  
+ }
+)
 async function searchPhoto(namePhoto, page=1, perPage=40) {
   try {
     return response = await axios(`${basaUrl}?key=${key}&q=${namePhoto}&image_type=${imagePhoto}&safesearch=${safesearch}&orientation=${orientation}&page=${page}&per_page=${perPage}`);
@@ -48,9 +60,17 @@ async function getPicture(event) {
  
 
   namePhoto = event.target.elements.searchQuery.value.trim();
-  
-  const result= await searchPhoto(namePhoto);
-  let arr = result.data.hits
+  const result = await searchPhoto(namePhoto)
+  // event.target.reset(); 
+
+  const totalHits=result.data.totalHits
+  const arr = result.data.hits
+ 
+
+  if (totalHits !== 0) {
+    Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`)
+    
+  }
 
 
   console.log(arr)
@@ -60,7 +80,8 @@ async function getPicture(event) {
     
   }
    {
-   return markup(arr);
+    return markup(arr);
+    
    
 
   }
@@ -95,14 +116,19 @@ btnLoadMore.addEventListener('click', async () => {
   const response = await searchPhoto(namePhoto, page, perPage)
   page += 1;
 
-  arr.push(...response.data.hits)
-  markup(arr);
-
-  if(!searchQwery.value.trim()) {
-    galleryList.innerHTML = ''
-    if (namePhoto) {
-  console.log('aaa')
-}
+ if (arr1.push(...response.data.hits)) {
+    markup(arr1);
+    btnLoadMore.style.display = 'block'
   }
+
+
+   {
+      
+    }
+
+  
 }) 
 
+
+
+ 
