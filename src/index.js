@@ -1,4 +1,4 @@
-import Notiflix, { Block } from 'notiflix'
+import Notiflix from 'notiflix'
 import axios from 'axios'
 const galleryList = document.querySelector('.gallery')
 const form = document.querySelector('#search-form')
