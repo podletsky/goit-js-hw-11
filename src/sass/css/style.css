@@ -1,0 +1,31 @@
+ .load-more{
+ 
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+/* .photo-card{
+    width: 25%;
+}
+
+
+   
+
+
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+}
+   
+   
+   
+   
+   .photo-card{
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+}
+* {
+    box-sizing: border-box;
+}  */
