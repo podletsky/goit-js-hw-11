@@ -22,7 +22,7 @@ const q=btnSubmit.addEventListener('click', () => {
 
 
 
-imageCard=[]
+
 searchQwery.addEventListener('input', () => {
   if (!searchQwery.value.trim()) {
     galleryList.innerHTML = '';
