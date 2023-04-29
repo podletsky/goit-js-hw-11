@@ -10,8 +10,11 @@ const btnSubmit = form.querySelector('button[type="submit"]');
 btnLoadMore.style.display = 'none';
 
 btnSubmit.addEventListener('click', () => {
-  btnLoadMore.style.display = 'block';
+  setTimeout(() => {
+    btnLoadMore.style.display = 'block';
+  }, 2000); 
 });
+
 btnLoadMore.addEventListener('click', () => {
   btnLoadMore.style.display = 'none';
   
@@ -86,19 +89,19 @@ async function getPicture(event) {
 async function markup(arr) {
   const imageCard = arr.map(({ comments, webformatURL, downloads, likes, largeImageURL, tags, views }) => `
     <div class="photo-card">
-       <a class href=${largeImageURL}><img wigth='250px' src=${webformatURL} alt=${tags}loading="lazy" a/>
+       <a class=link href=${largeImageURL}><img class='img'src=${webformatURL} alt=${tags}loading="lazy" a/>
       <div class="info">
         <p class="info-item">
-         <b>${likes}</b>
+         <b>likes ${likes}</b>
         </p>
         <p class="info-item">
-          <b>${views}</b>
+          <b>views ${views}</b>
         </p>
         <p class="info-item">
-          <b>${comments}</b>
+          <b>comments ${comments}</b>
         </p>
         <p class="info-item">
-          <b>${downloads}</b>
+          <b>downloads ${downloads}</b>
         </p>
       </div>
     </div>
